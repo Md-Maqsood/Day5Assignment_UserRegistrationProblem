@@ -40,7 +40,7 @@ public class UserRegistration {
 		if (password.length()>=8) {
 			return true;
 		} else {
-			System.out.println("Invalid entry for a first_name or a last_name");
+			System.out.println("Invalid entry for a password");
 			return false;
 		}
 	}
