@@ -37,7 +37,7 @@ public class UserRegistration {
 	}
 	
 	public static boolean validatePassword(String password) {
-		if ((password.length()>=8)&&Pattern.matches("*[A-Z]*", password)&&Pattern.matches("*[0-9]*", password)&&Pattern.matches("[a-zA-Z0-9]*[^a-z^A-Z^0-9^ ]*[a-zA-Z0-9]*", password)) {
+		if ((password.length()>=8)&&Pattern.matches(".*[A-Z].*", password)&&Pattern.matches(".*[0-9].*", password)&&Pattern.matches("[a-zA-Z0-9]*[^a-z^A-Z^0-9^ ]*[a-zA-Z0-9]*", password)) {
 			return true;
 		} else {
 			System.out.println("Invalid entry for a password");
@@ -72,6 +72,10 @@ public class UserRegistration {
 		}
 		for (User user : userReg.usersList) {
 			System.out.println(user);
+		}
+		String[] sampleEmailList=new String[]{"abc@yahoo.com","abc-100@yahoo.com","abc.100@yahoo.com","abc111@abc.com","abc-100@abc.net","abc.100@abc.com.au","abc@1.com","abc@gmail.com.com","abc+100@gmail.com","abc","abc@.com.my","abc123@gmail.a","abc123@.com","abc123@.com.com",".abc@abc.com","abc()*@gmail.com","abc@%*.com","abc..2002@gmail.com","abc.@gmail.com","abc@abc@gmail.com","abc@gmail.com.1a","abc@gmail.com.aa.au"};
+		for(String i:sampleEmailList){
+			System.out.println(i+": "+validateEmail(i));
 		}
 		sc.close();
 	}
