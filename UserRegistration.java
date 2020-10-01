@@ -35,6 +35,15 @@ public class UserRegistration {
 			return false;
 		}
 	}
+	
+	public static boolean validatePassword(String password) {
+		if (password.length()>=8) {
+			return true;
+		} else {
+			System.out.println("Invalid entry for a first_name or a last_name");
+			return false;
+		}
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -51,8 +60,9 @@ public class UserRegistration {
 				String email = sc.nextLine();
 				System.out.println("Enter the phone number: ");
 				String phoneNo = sc.nextLine();
-				if (validateName(firstName) && validateName(lastName) && validateEmail(email)&&validatePhoneNo(phoneNo)) {
-					userReg.usersList.add(new User(firstName, lastName, email,phoneNo));
+				System.out.println("Enter the password: ");
+				String password = sc.nextLine();
+				if (validateName(firstName) && validateName(lastName) && validateEmail(email)&&validatePhoneNo(phoneNo)&&validatePassword(password)) {
 				}
 			} else if (choice == 2) {
 				break;
@@ -72,13 +82,23 @@ class User {
 	private String lastName;
 	private String email;
 	private String phoneNo;
+	private String password;
 
-	public User(String firstName, String lastName, String email, String phoneNo) {
+	public User(String firstName, String lastName, String email, String phoneNo, String password) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.phoneNo = phoneNo;
+		this.password = password;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getPhoneNo() {
@@ -116,7 +136,7 @@ class User {
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNo=" + phoneNo
-				+ "]";
+				+ ", password=" + password + "]";
 	}
 
 }
