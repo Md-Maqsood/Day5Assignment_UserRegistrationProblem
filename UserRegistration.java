@@ -22,7 +22,7 @@ public class UserRegistration {
 		if (Pattern.matches("^[a-zA-Z0-9]+([_+-.]{1}[a-zA-Z0-9]+)?@[a-zA-Z0-9]+[.]{1}[a-zA-Z]{2,}([_+-.]{1}[a-zA-Z]{2,})?",email)) {
 			return true;
 		} else {
-			System.out.println("Invalid entry for an email.");
+			System.out.println("Invalid entry for an email");
 			return false;
 		}
 	}
