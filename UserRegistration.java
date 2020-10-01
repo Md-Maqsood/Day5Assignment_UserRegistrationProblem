@@ -37,10 +37,10 @@ public class UserRegistration {
 	}
 	
 	public static boolean validatePassword(String password) {
-		if ((password.length()>=8)&&Pattern.matches("*[A-Z]*", password)&&Pattern.matches("*[0-9]*", password)) {
+		if ((password.length()>=8)&&Pattern.matches(".*[A-Z].*", password)&&Pattern.matches(".*[0-9].*", password)) {
 			return true;
 		} else {
-			System.out.println("Invalid entry for a first_name or a last_name");
+			System.out.println("Invalid entry for a password");
 			return false;
 		}
 	}
