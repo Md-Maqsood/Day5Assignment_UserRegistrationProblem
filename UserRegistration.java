@@ -26,6 +26,15 @@ public class UserRegistration {
 			return false;
 		}
 	}
+	
+	public static boolean validatePhoneNo(String phoneNo) {
+		if (Pattern.matches("^[1-9]{1,3}[ ]{1}[1-9]{1}[0-9]{9}", phoneNo)) {
+			return true;
+		} else {
+			System.out.println("Invalid entry for a phone number");
+			return false;
+		}
+	}
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
@@ -40,8 +49,10 @@ public class UserRegistration {
 				String lastName = sc.nextLine();
 				System.out.println("Enter the email: ");
 				String email = sc.nextLine();
-				if (validateName(firstName) && validateName(lastName) && validateEmail(email)) {
-					userReg.usersList.add(new User(firstName, lastName, email));
+				System.out.println("Enter the phone number: ");
+				String phoneNo = sc.nextLine();
+				if (validateName(firstName) && validateName(lastName) && validateEmail(email)&&validatePhoneNo(phoneNo)) {
+					userReg.usersList.add(new User(firstName, lastName, email,phoneNo));
 				}
 			} else if (choice == 2) {
 				break;
@@ -60,12 +71,22 @@ class User {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private String phoneNo;
 
-	public User(String firstName, String lastName, String email) {
+	public User(String firstName, String lastName, String email, String phoneNo) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
+		this.phoneNo = phoneNo;
+	}
+
+	public String getPhoneNo() {
+		return phoneNo;
+	}
+
+	public void setPhoneNo(String phoneNo) {
+		this.phoneNo = phoneNo;
 	}
 
 	public String getEmail() {
@@ -94,7 +115,8 @@ class User {
 
 	@Override
 	public String toString() {
-		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "]";
+		return "User [firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phoneNo=" + phoneNo
+				+ "]";
 	}
 
 }
