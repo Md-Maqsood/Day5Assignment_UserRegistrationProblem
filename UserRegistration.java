@@ -10,7 +10,7 @@ public class UserRegistration {
 	}
 
 	public static boolean validateName(String name) {
-		if (Pattern.matches("^[A-Z]([a-z]{2,}|[A-Z]{2,})", name)) {
+		if (Pattern.matches("^[A-Z]([a-z]{2,}|[A-Z]{2,})$", name)) {
 			return true;
 		} else {
 			System.out.println("Invalid entry for a first_name or a last_name");
@@ -19,7 +19,7 @@ public class UserRegistration {
 	}
 
 	public static boolean validateEmail(String email) {
-		if (Pattern.matches("^[a-zA-Z0-9]+([_+-.]{1}[a-zA-Z0-9]+)?@[a-zA-Z0-9]+[.]{1}[a-zA-Z]{2,}([_+-.]{1}[a-zA-Z]{2,})?",email)) {
+		if (Pattern.matches("^[a-zA-Z0-9]+([_+-.]{1}[a-zA-Z0-9]+)?@[a-zA-Z0-9]+[.]{1}[a-zA-Z]{2,4}([.]{1}[a-zA-Z]{2,3})?$",email)) {
 			return true;
 		} else {
 			System.out.println("Invalid entry for an email");
@@ -28,7 +28,7 @@ public class UserRegistration {
 	}
 	
 	public static boolean validatePhoneNo(String phoneNo) {
-		if (Pattern.matches("^[1-9]{1,3}[ ]{1}[1-9]{1}[0-9]{9}", phoneNo)) {
+		if (Pattern.matches("^[1-9]{1,3}[ ]{1}[1-9]{1}[0-9]{9}$", phoneNo)) {
 			return true;
 		} else {
 			System.out.println("Invalid entry for a phone number");
@@ -37,7 +37,7 @@ public class UserRegistration {
 	}
 	
 	public static boolean validatePassword(String password) {
-		if ((password.length()>=8)&&Pattern.matches(".*[A-Z].*", password)&&Pattern.matches(".*[0-9].*", password)&&Pattern.matches("[a-zA-Z0-9]*[^a-z^A-Z^0-9^ ]*[a-zA-Z0-9]*", password)) {
+		if ((password.length()>=8)&&Pattern.matches("^.*[A-Z].*$", password)&&Pattern.matches("^.*[0-9].*$", password)&&Pattern.matches("^[a-zA-Z0-9]*[^a-z^A-Z^0-9^ ]*[a-zA-Z0-9]*$", password)) {
 			return true;
 		} else {
 			System.out.println("Invalid entry for a password");
@@ -45,9 +45,8 @@ public class UserRegistration {
 		}
 	}
 
-	public static void main(String[] args) {
+	public void addUsers(){
 		Scanner sc = new Scanner(System.in);
-		UserRegistration userReg = new UserRegistration();
 		while (true) {
 			System.out.println("1.Add a User\n2.Exit\nEnter your choice: ");
 			int choice = Integer.parseInt(sc.nextLine());
@@ -62,7 +61,8 @@ public class UserRegistration {
 				String phoneNo = sc.nextLine();
 				System.out.println("Enter the password: ");
 				String password = sc.nextLine();
-				if (validateName(firstName) && validateName(lastName) && validateEmail(email)&&validatePhoneNo(phoneNo)&&validatePassword(password)) {
+				if (validateName(firstName) && validateName(lastName) && validateEmail(email)&&validatePhoneNo(phoneNo)&&validatePassword(password)){
+					this.usersList.add(new User(firstName, lastName, email, phoneNo, password));
 				}
 			} else if (choice == 2) {
 				break;
@@ -70,6 +70,11 @@ public class UserRegistration {
 				System.out.println("Invalid Choice. Try again.");
 			}
 		}
+		sc.close();
+	}
+	public static void main(String[] args) {
+		UserRegistration userReg = new UserRegistration();
+		userReg.addUsers();
 		for (User user : userReg.usersList) {
 			System.out.println(user);
 		}
@@ -77,7 +82,7 @@ public class UserRegistration {
 		for(String i:sampleEmailList){
 			System.out.println(i+": "+validateEmail(i));
 		}
-		sc.close();
+
 	}
 }
 
